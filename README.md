@@ -61,12 +61,12 @@ To get the app running locally, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/kiptr/spendwise.git
+    git clone https://github.com/kiptr/SpendWise.git
     ```
 
 2. **Navigate into the project directory**:
     ```bash
-    cd spendwise
+    cd SpendWise
     ```
 
 3. **Install the dependencies**:
