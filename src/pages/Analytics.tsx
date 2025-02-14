@@ -20,7 +20,7 @@ import {
   Filler,
   ArcElement,
 } from "chart.js";
-import { Line, Bar } from "react-chartjs-2";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
 import { mockTransactions } from "../data/mock";
 import { formatIDR } from "../utils/currency";
 
@@ -103,6 +103,23 @@ export function Analytics() {
         data: [65, 59, 80, 81, 56, 55, 40],
         backgroundColor: "rgba(234, 179, 8, 0.8)",
         borderRadius: 8,
+      },
+    ],
+  };
+
+  const categoryData = {
+    labels: ["Subscription", "Services", "Hardware", "Software", "Others"],
+    datasets: [
+      {
+        data: [25, 30, 15, 20, 10],
+        backgroundColor: [
+          "rgba(234, 179, 8, 0.8)",
+          "rgba(34, 197, 94, 0.8)",
+          "rgba(239, 68, 68, 0.8)",
+          "rgba(245, 158, 11, 0.8)",
+          "rgba(147, 51, 234, 0.8)",
+        ],
+        borderWidth: 0,
       },
     ],
   };
@@ -222,6 +239,26 @@ export function Analytics() {
               },
             }}
           />
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <h3 className="text-lg font-semibold mb-6">Spending by Category</h3>
+          <div className="flex items-center justify-center">
+            <div className="w-[300px]">
+              <Doughnut
+                data={categoryData}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      position: "right" as const,
+                    },
+                  },
+                  cutout: "70%",
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
