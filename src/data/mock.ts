@@ -1,4 +1,4 @@
-import type { SavingPlan, MonthlyData } from "../types";
+import type { SavingPlan, MonthlyData, Transaction } from "../types";
 
 export const mockSavingPlans: SavingPlan[] = [
   {
@@ -53,3 +53,33 @@ export function getLast6Months(): MonthlyData[] {
     expenses: Math.floor(Math.random() * 15000000) + 5000000,
   }));
 }
+
+export const mockTransactions: Transaction[] = [
+  {
+    id: "1",
+    payment: "Salary",
+    description: "Monthly salary payment",
+    amount: 15000000,
+    date: "25 oct 2023",
+    timestamp: "10:00:00",
+    type: "income",
+  },
+  {
+    id: "1",
+    payment: "Salary",
+    description: "Monthly salary payment",
+    amount: 15000000,
+    date: "25 oct 2023",
+    timestamp: "10:00:00",
+    type: "income",
+  },
+  {
+    id: "1",
+    payment: "Salary",
+    description: "Monthly salary payment",
+    amount: 15000000,
+    date: "25 oct 2023",
+    timestamp: "10:00:00",
+    type: "income",
+  },
+];
