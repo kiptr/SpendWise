@@ -169,7 +169,7 @@ export function Analytics() {
           icon={TrendingUp}
         />
         <StatCard
-          title="Total Income"
+          title="Total Transactions"
           value={stats.transactionCount}
           icon={DollarSign}
           trend="up"
