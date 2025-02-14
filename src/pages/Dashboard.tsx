@@ -3,7 +3,12 @@ import { BalanceCard } from "../components/BalanceCard";
 import { IncomeExpenses } from "../components/IncomeExpenses";
 import { SavingPlans } from "../components/SavingPlans";
 import { GeneralPayment } from "../components/GeneralPayment";
-import { getLast6Months, mockSavingPlans } from "../data/mock";
+import { LastIncome } from "../components/LastIncome";
+import {
+  getLast6Months,
+  mockSavingPlans,
+  mockTransactions,
+} from "../data/mock";
 
 export function Dashboard() {
   const monthlyData = getLast6Months();
@@ -16,6 +21,7 @@ export function Dashboard() {
           <IncomeExpenses incomes={5000000} expenses={1500000} />
         </div>
         <SavingPlans plans={mockSavingPlans} />
+        <LastIncome transactions={mockTransactions} />
       </div>
       <div className="col-span-12 lg:col-span-5 grid grid-rows-[320px_1fr] gap-6">
         <GeneralPayment data={monthlyData} />
