@@ -260,6 +260,65 @@ export function Analytics() {
             </div>
           </div>
         </div>
+
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <h3 className="text-lg font-semibold mb-6">Performance Metrics</h3>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <div>
+                  <span className="text-gray-600">Monthly Growth Rate</span>
+                  <p className="text-xs text-gray-500">
+                    Increase in transaction volume
+                  </p>
+                </div>
+                <span className="font-medium">64%</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-emerald-500"
+                  style={{ width: "64%" }}
+                ></div>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <div>
+                  <span className="text-gray-600">
+                    Average Daily Transaction
+                  </span>
+                  <p className="text-xs text-gray-500">
+                    Number of transactions per day
+                  </p>
+                </div>
+                <span className="font-medium">42</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-yellow-500"
+                  style={{ width: "42%" }}
+                ></div>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <div>
+                  <span className="text-gray-600">Expense Ratio</span>
+                  <p className="text-xs text-gray-500">
+                    Expense as % of income
+                  </p>
+                </div>
+                <span className="font-medium">40%</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-red-500"
+                  style={{ width: "40%" }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
