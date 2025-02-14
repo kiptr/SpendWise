@@ -39,7 +39,7 @@ export function TransactionList({ transactions }: TransactionListProps) {
                   </div>
                 </td>
                 <td className="text-sm">
-                  <span className="text-emerald-600">
+                  <span className="text-red-600">
                     {formatIDR(transaction.amount)}
                   </span>
                 </td>
