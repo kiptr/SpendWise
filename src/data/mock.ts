@@ -1,4 +1,4 @@
-import type { SavingPlan } from "../types";
+import type { SavingPlan, MonthlyData } from "../types";
 
 export const mockSavingPlans: SavingPlan[] = [
   {
@@ -23,3 +23,33 @@ export const mockSavingPlans: SavingPlan[] = [
     type: "gadget",
   },
 ];
+
+export function getLast6Months(): MonthlyData[] {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+
+  const last6Months = Array.from({ length: 6 }, (_, i) => {
+    const monthIndex = (currentMonth - i + 12) % 12;
+    return months[monthIndex];
+  }).reverse();
+
+  return last6Months.map((month) => ({
+    month,
+    income: Math.floor(Math.random() * 30000000) + 20000000,
+    expenses: Math.floor(Math.random() * 15000000) + 5000000,
+  }));
+}
