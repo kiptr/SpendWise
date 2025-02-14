@@ -20,7 +20,7 @@ import {
   Filler,
   ArcElement,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import { mockTransactions } from "../data/mock";
 import { formatIDR } from "../utils/currency";
 
@@ -91,6 +91,18 @@ export function Analytics() {
         backgroundColor: "rgba(239, 68, 68, 0.1)",
         fill: true,
         tension: 0.4,
+      },
+    ],
+  };
+
+  const dailyTransactions = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        label: "Transactions",
+        data: [65, 59, 80, 81, 56, 55, 40],
+        backgroundColor: "rgba(234, 179, 8, 0.8)",
+        borderRadius: 8,
       },
     ],
   };
@@ -184,6 +196,28 @@ export function Analytics() {
                       return formatIDR(value as number);
                     },
                   },
+                },
+              },
+            }}
+          />
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <h3 className="text-lg font-semibold mb-6">
+            Daily Transaction Volume
+          </h3>
+          <Bar
+            data={dailyTransactions}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
                 },
               },
             }}
