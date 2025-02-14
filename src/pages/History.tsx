@@ -12,6 +12,48 @@ import { formatIDR } from "../utils/currency";
 import type { Transaction } from "../types";
 
 export function History() {
+  const [selectedMonth, setSelectedMonth] = useState<string>("all");
+  const [selectedYear, setSelectedYear] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [transactionType, setTransactionType] = useState<
+    "all" | "income" | "expense"
+  >("all");
+
+  const years = useMemo(() => {
+    const uniqueYears = new Set(
+      mockTransactions.map((t) =>
+        new Date(t.date.split(" ").reverse().join("-")).getFullYear()
+      )
+    );
+    return Array.from(uniqueYears).sort((a, b) => b - a);
+  }, []);
+
+  const paymentSources = useMemo(() => {
+    const uniqueSources = new Set(mockTransactions.map((t) => t.payment));
+    return ["all", ...Array.from(uniqueSources)];
+  }, []);
+
+  const filteredTransactions = useMemo(() => {
+    return mockTransactions.filter((transaction) => {
+      const transactionDate = new Date(
+        transaction.date.split(" ").reverse().join("-")
+      );
+      const transactionYear = transactionDate.getFullYear().toString();
+      const transactionMonth = transactionDate.getMonth();
+
+      const yearMatch =
+        selectedYear === "all" || transactionYear === selectedYear;
+      const monthMatch =
+        selectedMonth === "all" || transactionMonth === parseInt(selectedMonth);
+      const sourceMatch =
+        selectedCategory === "all" || transaction.payment === selectedCategory;
+      const typeMatch =
+        transactionType === "all" || transaction.type === transactionType;
+
+      return yearMatch && monthMatch && sourceMatch && typeMatch;
+    });
+  }, [selectedYear, selectedMonth, selectedCategory, transactionType]);
+
   const statistics = useMemo(() => {
     const expenses = mockTransactions.filter((t) => t.type === "expense");
 
@@ -51,77 +93,156 @@ export function History() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div className="bg-white shadow-sm p-6 rounded-2xl">
           <div className="flex items-center gap-4 m-2">
-            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+            <div className="flex justify-center items-center bg-red-100 rounded-xl w-12 h-12">
               <TrendingUp className="w-6 h-6 text-red-600" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Total Expenses</p>
-              <p className="text-xl font-semibold">
+              <p className="text-gray-600 text-sm">Total Expenses</p>
+              <p className="font-semibold text-xl">
                 {formatIDR(statistics.total)}
               </p>
             </div>
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-gray-500 text-sm">
             For {mockTransactions.filter((t) => t.type === "expense").length}{" "}
             transactions
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white shadow-sm p-6 rounded-2xl">
           <div className="flex items-center gap-4 m-2">
-            <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+            <div className="flex justify-center items-center bg-yellow-100 rounded-xl w-12 h-12">
               <Calendar className="w-6 h-6 text-yellow-600" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Average Expenses</p>
-              <p className="text-xl font-semibold">
+              <p className="text-gray-600 text-sm">Average Expenses</p>
+              <p className="font-semibold text-xl">
                 {formatIDR(statistics.average)}
               </p>
             </div>
           </div>
-          <div className="text-sm text-gray-500">Per transaction</div>
+          <div className="text-gray-500 text-sm">Per transaction</div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white shadow-sm p-6 rounded-2xl">
           <div className="flex items-center gap-4 m-2">
-            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+            <div className="flex justify-center items-center bg-red-100 rounded-xl w-12 h-12">
               <ArrowUpRight className="w-6 h-6 text-red-600" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Highest Expenses</p>
-              <p className="text-xl font-semibold">
+              <p className="text-gray-600 text-sm">Highest Expenses</p>
+              <p className="font-semibold text-xl">
                 {formatIDR(statistics.highest)}
               </p>
             </div>
           </div>
-          <div className="text-sm text-gray-500">Single transaction</div>
+          <div className="text-gray-500 text-sm">Single transaction</div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white shadow-sm p-6 rounded-2xl">
           <div className="flex items-center gap-4 m-2">
-            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+            <div className="flex justify-center items-center bg-red-100 rounded-xl w-12 h-12">
               <ArrowDownRight className="w-6 h-6 text-red-600" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Lowest Expenses</p>
-              <p className="text-xl font-semibold">
+              <p className="text-gray-600 text-sm">Lowest Expenses</p>
+              <p className="font-semibold text-xl">
                 {formatIDR(statistics.lowest)}
               </p>
             </div>
           </div>
-          <div className="text-sm text-gray-500">Single transaction</div>
+          <div className="text-gray-500 text-sm">Single transaction</div>
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-100">
+      <div className="bg-white shadow-sm p-6 rounded-2xl">
+        <div className="flex flex-wrap gap-4">
+          <div className="flex-1 min-w-[200px]">
+            <label className="block mb-1 font-medium text-gray-700 text-sm">
+              Year
+            </label>
+            <select
+              className="bg-white px-3 py-2 border border-gray-200 focus:border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+            >
+              <option value="all">All years</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex-1 min-w-[200px]">
+            <label className="block mb-1 font-medium text-gray-700 text-sm">
+              Month
+            </label>
+            <select
+              className="bg-white px-3 py-2 border border-gray-200 focus:border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <option value="all">All Months</option>
+              {Array.from({ length: 12 }, (_, i) => (
+                <option key={i} value={i}>
+                  {new Date(2000, i).toLocaleString("default", {
+                    month: "long",
+                  })}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex-1 min-w-[200px]">
+            <label className="block mb-1 font-medium text-gray-700 text-sm">
+              Payment Source / Recipient
+            </label>
+            <select
+              className="bg-white px-3 py-2 border border-gray-200 focus:border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="all">All Sources</option>
+              {paymentSources.slice(1).map((source) => (
+                <option key={source} value={source}>
+                  {source}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex-1 min-w-[200px]">
+            <label className="block mb-1 font-medium text-gray-700 text-sm">
+              Transaction Type
+            </label>
+            <select
+              className="bg-white px-3 py-2 border border-gray-200 focus:border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full"
+              value={transactionType}
+              onChange={(e) =>
+                setTransactionType(
+                  e.target.value as "all" | "income" | "expense"
+                )
+              }
+            >
+              <option value="all">All Types</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white shadow-sm rounded-2xl divide-y divide-gray-100">
         {groupedTransactions.map(([date, transactions]) => (
           <div key={date} className="p-6">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">{date}</h3>
-              <span className="text-sm text-gray-500">
+              <span className="text-gray-500 text-sm">
                 {transactions.length} transaction
                 {transactions.length !== 1 ? "s" : ""}
               </span>
@@ -130,11 +251,11 @@ export function History() {
               {transactions.map((transaction) => (
                 <div
                   key={transaction.id}
-                  className="flex items-center justify-between"
+                  className="flex justify-between items-center"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
-                      <span className="text-gray-600 font-medium">
+                    <div className="flex justify-center items-center bg-gray-100 rounded-full w-10 h-10 overflow-hidden">
+                      <span className="font-medium text-gray-600">
                         {transaction.payment[0]}
                       </span>
                     </div>
@@ -142,14 +263,14 @@ export function History() {
                       <div className="flex items-center gap-2">
                         <p className="font-medium">{transaction.payment}</p>
                         {transaction.type === "income" ? (
-                          <div className="px-2 py-0.5 bg-emerald-100 rounded text-emerald-700 text-xs font-medium">
+                          <div className="bg-emerald-100 px-2 py-0.5 rounded font-medium text-emerald-700 text-xs">
                             <div className="flex items-center gap-1">
                               <ArrowUpCircle size={12} />
                               Income
                             </div>
                           </div>
                         ) : (
-                          <div className="px-2 py-0.5 bg-red-100 rounded text-red-700 text-xs font-medium">
+                          <div className="bg-red-100 px-2 py-0.5 rounded font-medium text-red-700 text-xs">
                             <div className="flex items-center gap-1">
                               <ArrowDownCircle size={12} />
                               Expense
@@ -157,7 +278,7 @@ export function History() {
                           </div>
                         )}
                       </div>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-gray-500 text-sm">
                         {transaction.description}
                       </p>
                     </div>
@@ -173,7 +294,7 @@ export function History() {
                       {transaction.type === "income" ? "+" : "-"}
                       {formatIDR(transaction.amount)}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-gray-500 text-sm">
                       {transaction.timestamp}
                     </p>
                   </div>
