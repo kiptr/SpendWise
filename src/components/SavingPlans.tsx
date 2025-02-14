@@ -41,6 +41,27 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     textColor: "text-yellow-500",
     icon: "Smartphone",
   },
+  {
+    id: "education",
+    name: "Education Plans",
+    bgColor: "bg-blue-500",
+    textColor: "text-blue-500",
+    icon: "GraduationCap",
+  },
+  {
+    id: "property",
+    name: "Property Plans",
+    bgColor: "bg-rose-500",
+    textColor: "text-rose-500",
+    icon: "Home",
+  },
+  {
+    id: "vehicle",
+    name: "Vehicle Plans",
+    bgColor: "bg-indigo-500",
+    textColor: "text-indigo-500",
+    icon: "Car",
+  },
 ];
 
 const AVAILABLE_COLORS = [
