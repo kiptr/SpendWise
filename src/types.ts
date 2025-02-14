@@ -19,3 +19,13 @@ export interface MonthlyData {
   income: number;
   expenses: number;
 }
+
+export interface Transaction {
+  id: string;
+  payment: string;
+  description: string;
+  amount: number;
+  date: string;
+  timestamp: string;
+  type: "income" | "expense";
+}
