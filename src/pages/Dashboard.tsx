@@ -4,6 +4,7 @@ import { IncomeExpenses } from "../components/IncomeExpenses";
 import { SavingPlans } from "../components/SavingPlans";
 import { GeneralPayment } from "../components/GeneralPayment";
 import { LastIncome } from "../components/LastIncome";
+import { TransactionList } from "../components/TransactionList";
 import {
   getLast6Months,
   mockSavingPlans,
@@ -25,6 +26,7 @@ export function Dashboard() {
       </div>
       <div className="col-span-12 lg:col-span-5 grid grid-rows-[320px_1fr] gap-6">
         <GeneralPayment data={monthlyData} />
+        <TransactionList transactions={mockTransactions.slice(-9)} />
       </div>
     </div>
   );
