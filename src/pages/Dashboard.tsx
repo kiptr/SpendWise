@@ -13,6 +13,9 @@ import {
 
 export function Dashboard() {
   const monthlyData = getLast6Months();
+  const filteredTransactions = mockTransactions.filter(
+    (transaction) => transaction.type === "expense"
+  );
 
   return (
     <div className="grid grid-cols-12 gap-6 flex-1">
@@ -26,7 +29,7 @@ export function Dashboard() {
       </div>
       <div className="col-span-12 lg:col-span-5 grid grid-rows-[320px_1fr] gap-6">
         <GeneralPayment data={monthlyData} />
-        <TransactionList transactions={mockTransactions.slice(-9)} />
+        <TransactionList transactions={filteredTransactions.slice(0, 9)} />
       </div>
     </div>
   );
