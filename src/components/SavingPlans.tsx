@@ -151,15 +151,15 @@ export function SavingPlans({ plans }: SavingPlansProps) {
           <h2 className="text-lg font-medium">Savings plan</h2>
           <p className="text-sm text-gray-500">{plans.length} saving plans</p>
         </div>
-      </div>
-      <div className="flex items-center gap-3">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="text-sm text-yellow-600 hover:text-yellow-700 flex items-center gap-1"
-        >
-          See more details
-          <span className="text-xs">→</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="text-sm text-yellow-600 hover:text-yellow-700 cursor-pointer flex items-center gap-1"
+          >
+            See more details
+            <span className="text-xs">→</span>
+          </button>
+        </div>
       </div>
 
       <div className="space-y-3 max-h-[280px] overflow-y-auto pr-2 scrollbar-thin">
