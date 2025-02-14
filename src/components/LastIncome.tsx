@@ -24,7 +24,7 @@ export function LastIncome({ transactions }: LastIncomeProps) {
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                A
+                <ArrowUpCircle className="w-6 h-6 text-emerald-500" />
               </div>
               <div>
                 <p className="font-medium">{income.payment}</p>
