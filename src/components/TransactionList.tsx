@@ -7,10 +7,6 @@ interface TransactionListProps {
 }
 
 export function TransactionList({ transactions }: TransactionListProps) {
-  const expenses = transactions.filter(
-    (transaction) => transaction.type === "expense"
-  );
-
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm h-full">
       <div className="flex justify-between items-center mb-4">
@@ -27,7 +23,7 @@ export function TransactionList({ transactions }: TransactionListProps) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {expenses.map((transaction) => (
+            {transactions.map((transaction) => (
               <tr key={transaction.id}>
                 <td className="py-3">
                   <div className="flex items-center gap-3">
