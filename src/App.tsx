@@ -5,13 +5,14 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { Layout } from "./components/Layout";
 import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/">
+        <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
         </Route>
       </Routes>
