@@ -15,7 +15,7 @@ A web application built with **Vite**, **React**, and **TypeScript** to help you
    - Add new transactions for income or expense.
    - **Search**: Easily search through your transactions.
    - **Filter**: Filter transactions by date, type, payment source, recipient, etc.
-   - **Download**: Download your transactions in a suitable format (e.g., CSV).
+   - **Download**: Download your transactions in an Excel format.
 
 ### 3. **Analytics Page**
    - Analyze your financial transactions.
@@ -104,8 +104,6 @@ Contributions are welcome! If you'd like to contribute, fork the repository, cre
 ## Screenshots
 
 Here’s a preview of what the app looks like:
-
-![Dashboard Screenshot](path-to-your-screenshot.png)
 
 ---
 
