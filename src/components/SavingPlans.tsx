@@ -13,6 +13,7 @@ import {
   Car,
 } from "lucide-react";
 import { Modal } from "./Modal";
+import { formatIDR } from "../utils/currency";
 
 interface SavingPlansProps {
   plans: SavingPlan[];
@@ -122,9 +123,13 @@ export function SavingPlans({ plans }: SavingPlansProps) {
             <h3 className="font-medium text-sm">{plan.name}</h3>
             <div className="flex items-center justify-between mt-0.5">
               <div className="flex items-baseline gap-1">
-                <span className="text-sm font-medium">Rp.{plan.current}</span>
+                <span className="text-sm font-medium">
+                  {formatIDR(plan.current)}
+                </span>
                 <span className="text-xs text-gray-400">/</span>
-                <span className="text-xs text-gray-400">Rp.{plan.target}</span>
+                <span className="text-xs text-gray-400">
+                  {formatIDR(plan.target)}
+                </span>
               </div>
             </div>
           </div>
@@ -183,9 +188,13 @@ export function SavingPlans({ plans }: SavingPlansProps) {
             </div>
             <div className="space-y-2">
               <div className="flex items-baseline gap-2">
-                <span className="text-lg font-medium">Rp.{totalSavings}</span>
+                <span className="text-lg font-medium">
+                  {formatIDR(totalSavings)}
+                </span>
                 <span className="text-sm text-gray-400">/</span>
-                <span className="text-sm text-gray-400">Rp.{totalTarget}</span>
+                <span className="text-sm text-gray-400">
+                  {formatIDR(totalTarget)}
+                </span>
               </div>
               <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div

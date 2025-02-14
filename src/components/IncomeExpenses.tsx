@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpCircle, ArrowDownCircle } from "lucide-react";
+import { formatIDR } from "../utils/currency";
 
 interface IncomeExpensesProps {
   incomes: number;
@@ -19,7 +20,9 @@ export function IncomeExpenses({ incomes, expenses }: IncomeExpensesProps) {
             <ArrowUpCircle className="w-6 h-6 text-emerald-500" />
           </div>
           <div>
-            <span className="text-emerald-500 font-medium">+Rp. {incomes}</span>
+            <span className="text-emerald-500 font-medium">
+              +{formatIDR(incomes)}
+            </span>
             <p className="text-sm text-gray-600">Total incomes this month</p>
           </div>
         </div>
@@ -29,7 +32,9 @@ export function IncomeExpenses({ incomes, expenses }: IncomeExpensesProps) {
             <ArrowDownCircle className="w-6 h-6 text-red-500" />
           </div>
           <div>
-            <span className="text-red-500 font-medium">-Rp. {expenses}</span>
+            <span className="text-red-500 font-medium">
+              -{formatIDR(expenses)}
+            </span>
             <p className="text-sm text-gray-600">Total outcomes this month</p>
           </div>
         </div>

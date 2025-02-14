@@ -1,5 +1,6 @@
 import React from "react";
 import { CreditCard, Wallet } from "lucide-react";
+import { formatIDR } from "../utils/currency";
 
 interface BalanceCardProps {
   balance: number;
@@ -17,11 +18,11 @@ export function BalanceCard({ balance, savings }: BalanceCardProps) {
       </div>
 
       <div className="mb-4">
-        <span className="text-3xl font-bold">Rp. {balance}</span>
+        <span className="text-3xl font-bold">{formatIDR(balance)}</span>
       </div>
 
       <div className="text-white/90 text-sm">
-        <p>Extra savings Rp. {savings}</p>
+        <p>Extra savings {formatIDR(savings)}</p>
         <p className="text-white/70">Combination of bank accounts</p>
       </div>
 
