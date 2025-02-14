@@ -13,3 +13,9 @@ export interface PlanType {
   textColor: string;
   icon: string;
 }
+
+export interface MonthlyData {
+  month: string;
+  income: number;
+  expenses: number;
+}
