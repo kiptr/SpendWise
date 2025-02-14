@@ -9,6 +9,7 @@ import { Layout } from "./components/Layout";
 import { Dashboard } from "./pages/Dashboard";
 import { Transactions } from "./pages/Transactions";
 import { Analytics } from "./pages/Analytics";
+import { History } from "./pages/History";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="analytics" element={<Analytics />} />
+          <Route path="history" element={<History />} />
         </Route>
       </Routes>
     </Router>
