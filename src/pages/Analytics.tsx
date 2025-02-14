@@ -7,8 +7,35 @@ import {
   CreditCard,
   DollarSign,
 } from "lucide-react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  ArcElement,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 import { mockTransactions } from "../data/mock";
 import { formatIDR } from "../utils/currency";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  ArcElement
+);
 
 const months = [
   "Jan",
@@ -25,7 +52,7 @@ const months = [
   "Dec",
 ];
 const currentMonth = new Date().getMonth();
-const last12Month = Array.from({ length: 12 }, (_, i) => {
+const last12Months = Array.from({ length: 12 }, (_, i) => {
   const monthIndex = (currentMonth - i + 12) % 12;
   return months[monthIndex];
 }).reverse();
@@ -41,6 +68,32 @@ export function Analytics() {
       transactionCount: mockTransactions.length,
     };
   }, []);
+
+  const transactionData = {
+    labels: last12Months,
+    datasets: [
+      {
+        label: "Income",
+        data: last12Months.map(
+          () => Math.floor(Math.random() * 30000000) + 20000000
+        ),
+        borderColor: "rgb(34, 197, 94)",
+        backgroundColor: "rgba(34, 197, 94, 0.1)",
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        label: "Expenses",
+        data: last12Months.map(
+          () => Math.floor(Math.random() * 15000000) + 5000000
+        ),
+        borderColor: "rgb(239, 68, 68)",
+        backgroundColor: "rgba(239, 68, 68, 0.1)",
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
 
   const StatCard = ({ title, value, icon: Icon, trend, trendValue }: any) => (
     <div className="bg-white rounded-2xl p-6 shadow-sm">
@@ -93,6 +146,49 @@ export function Analytics() {
           trend="up"
           trendValue="8.1"
         />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <h3 className="text-lg font-semibold mb-6">
+            Income vs Expenses Trend
+          </h3>
+          <Line
+            data={transactionData}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top" as const,
+                },
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      let label = context.dataset.label || "";
+                      if (label) {
+                        label += ": ";
+                      }
+                      if (context.parsed.y !== null) {
+                        label += formatIDR(context.parsed.y);
+                      }
+                      return label;
+                    },
+                  },
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    callback: function (value) {
+                      return formatIDR(value as number);
+                    },
+                  },
+                },
+              },
+            }}
+          />
+        </div>
       </div>
     </div>
   );
