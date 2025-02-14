@@ -55,7 +55,7 @@ export function History() {
   }, [selectedYear, selectedMonth, selectedCategory, transactionType]);
 
   const statistics = useMemo(() => {
-    const expenses = mockTransactions.filter((t) => t.type === "expense");
+    const expenses = filteredTransactions.filter((t) => t.type === "expense");
 
     if (expenses.length === 0) {
       return {
@@ -73,10 +73,10 @@ export function History() {
     const lowest = Math.min(...amounts);
 
     return { total, average, amounts, highest, lowest };
-  }, [mockTransactions]);
+  }, [filteredTransactions]);
 
   const groupedTransactions = useMemo(() => {
-    const groups = mockTransactions.reduce((acc, transaction) => {
+    const groups = filteredTransactions.reduce((acc, transaction) => {
       if (!acc[transaction.date]) {
         acc[transaction.date] = [];
       }
@@ -89,7 +89,7 @@ export function History() {
       const dateB = new Date(b[0].split(" ").reverse().join("-"));
       return dateB.getTime() - dateA.getTime();
     });
-  }, [mockTransactions]);
+  }, [filteredTransactions]);
 
   return (
     <div className="space-y-6">
@@ -107,7 +107,8 @@ export function History() {
             </div>
           </div>
           <div className="text-gray-500 text-sm">
-            For {mockTransactions.filter((t) => t.type === "expense").length}{" "}
+            For{" "}
+            {filteredTransactions.filter((t) => t.type === "expense").length}{" "}
             transactions
           </div>
         </div>
