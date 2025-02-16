@@ -25,6 +25,7 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     name: "Vinyl Plans",
     bgColor: "bg-purple-100",
     textColor: "text-purple-500",
+    progressColor: "bg-purple-500",
     icon: "Disc3",
   },
   {
@@ -32,6 +33,7 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     name: "Travel Plans",
     bgColor: "bg-emerald-100",
     textColor: "text-emerald-500",
+    progressColor: "bg-emerald-500",
     icon: "Plane",
   },
   {
@@ -39,6 +41,7 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     name: "Gadget Plans",
     bgColor: "bg-yellow-100",
     textColor: "text-yellow-500",
+    progressColor: "bg-yellow-500",
     icon: "Smartphone",
   },
   {
@@ -46,6 +49,7 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     name: "Education Plans",
     bgColor: "bg-blue-100",
     textColor: "text-blue-500",
+    progressColor: "bg-blue-500",
     icon: "GraduationCap",
   },
   {
@@ -53,6 +57,7 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     name: "Property Plans",
     bgColor: "bg-rose-100",
     textColor: "text-rose-500",
+    progressColor: "bg-rose-500",
     icon: "Home",
   },
   {
@@ -60,21 +65,22 @@ const DEFAULT_PLAN_TYPES: PlanType[] = [
     name: "Vehicle Plans",
     bgColor: "bg-indigo-100",
     textColor: "text-indigo-500",
+    progressColor: "bg-indigo-500",
     icon: "Car",
   },
 ];
 
 const AVAILABLE_COLORS = [
-  { name: "Purple", bg: "bg-purple-100", text: "text-purple-500" },
-  { name: "Emerald", bg: "bg-emerald-100", text: "text-emerald-500" },
-  { name: "Yellow", bg: "bg-yellow-100", text: "text-yellow-500" },
-  { name: "Blue", bg: "bg-blue-100", text: "text-blue-500" },
-  { name: "Rose", bg: "bg-rose-100", text: "text-rose-500" },
-  { name: "Indigo", bg: "bg-indigo-100", text: "text-indigo-500" },
-  { name: "Teal", bg: "bg-teal-100", text: "text-teal-500" },
-  { name: "Orange", bg: "bg-orange-100", text: "text-orange-500" },
-  { name: "Cyan", bg: "bg-cyan-100", text: "text-cyan-500" },
-  { name: "Pink", bg: "bg-pink-100", text: "text-pink-500" },
+  { name: "Purple", bg: "bg-purple-500", text: "text-purple-500" },
+  { name: "Emerald", bg: "bg-emerald-500", text: "text-emerald-500" },
+  { name: "Yellow", bg: "bg-yellow-500", text: "text-yellow-500" },
+  { name: "Blue", bg: "bg-blue-500", text: "text-blue-500" },
+  { name: "Rose", bg: "bg-rose-500", text: "text-rose-500" },
+  { name: "Indigo", bg: "bg-indigo-500", text: "text-indigo-500" },
+  { name: "Teal", bg: "bg-teal-500", text: "text-teal-500" },
+  { name: "Orange", bg: "bg-orange-500", text: "text-orange-500" },
+  { name: "Cyan", bg: "bg-cyan-500", text: "text-cyan-500" },
+  { name: "Pink", bg: "bg-pink-500", text: "text-pink-500" },
 ];
 
 const ICONS_MAP = {
@@ -110,8 +116,9 @@ export function SavingPlans({ plans }: SavingPlansProps) {
       planTypes.find((t) => t.id === type) ?? {
         id: type,
         name: `${type.charAt(0).toUpperCase()}${type.slice(1)} Plans`,
-        bgColor: "bg-gray-500",
+        bgColor: "bg-gray-100",
         textColor: "text-gray-500",
+        progressColor: "bg-gray-500",
         icon: "CircleDollarSign",
       }
     );
@@ -136,7 +143,7 @@ export function SavingPlans({ plans }: SavingPlansProps) {
       <div className="bg-gray-50 p-4 rounded-xl">
         <div className="flex items-center gap-3 mb-3">
           <div
-            className={`w-10 h-10 rounded-full bg-opacity-10 ${config.bgColor} flex items-center justify-center ${config.textColor}`}
+            className={`w-10 h-10 rounded-full ${config.bgColor} bg-opacity-10 flex items-center justify-center ${config.textColor}`}
           >
             <DynamicIcon name={config.icon} />
           </div>
@@ -157,7 +164,7 @@ export function SavingPlans({ plans }: SavingPlansProps) {
         </div>
         <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
           <div
-            className={`h-full ${config.bgColor} transition-all duration-300`}
+            className={`h-full ${config.progressColor} transition-all duration-300`}
             style={{ width: `${progress}%` }}
           ></div>
         </div>
