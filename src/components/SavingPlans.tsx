@@ -143,7 +143,7 @@ export function SavingPlans({ plans }: SavingPlansProps) {
       <div className="bg-gray-50 p-4 rounded-xl">
         <div className="flex items-center gap-3 mb-3">
           <div
-            className={`w-10 h-10 rounded-full ${config.bgColor} bg-opacity-10 flex items-center justify-center ${config.textColor}`}
+            className={`w-10 h-10 rounded-full ${config.bgColor} flex items-center justify-center ${config.textColor}`}
           >
             <DynamicIcon name={config.icon} />
           </div>
