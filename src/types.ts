@@ -11,6 +11,7 @@ export interface PlanType {
   name: string;
   bgColor: string;
   textColor: string;
+  progressColor: string;
   icon: string;
 }
 
